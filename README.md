@@ -19,24 +19,5 @@ docker run --name=maniacontrol -d -v maniacontrol:/maniacontrol \
  registry.imperium-gaming.fr/imperium/docker-maniacontrol
 ```
 
-## Dev/Build
-```
-# Login
-docker login registry.imperium-gaming.fr
-
-# Build git.imperium-gaming.fr
-docker build -t registry.imperium-gaming.fr/imperium/docker-maniacontrol -t registry.imperium-gaming.fr/imperium/docker-maniacontrol:0.x .
-
-# Push git.imperium-gaming.fr
-docker push registry.imperium-gaming.fr/imperium/docker-maniacontrol:latest && docker push registry.imperium-gaming.fr/imperium/docker-maniacontrol:0.x
-
-
-# Build dockerhub
-docker build -t albanosdes/docker-maniacontrol -t albanosdes/docker-maniacontrol:0.x .
-
-# Push dockerhub
-docker push albanosdes/docker-maniacontrol && docker push albanosdes/docker-maniacontrol:0.x
-```
-
 ## Sources
 - https://github.com/ManiaControl/ManiaControl
