@@ -64,4 +64,16 @@ fi
 # Set trap to stop the script proprely when a docker stop is executed
 trap : EXIT TERM KILL INT SIGKILL SIGTERM SIGQUIT
 
+# netcat test mysql
+if [[ ! -z $(nc -zv ${MYSQL_SERVER_ADDRESS} ${MYSQL_SERVER_PORT} 2>&1 | grep refused) ]]; then
+  echo "${MYSQL_SERVER_ADDRESS} mysql server is not reachable on port ${MYSQL_SERVER_PORT}"
+  exit 1
+fi
+
+# netcat test trackmania
+if [[ ! -z $(nc -zv ${MANIAPLANET_SERVER_ADDRESS} ${MYSQL_SERVER_PORT} 2>&1 | grep refused) ]]; then
+  echo "${MANIAPLANET_SERVER_ADDRESS} trackmania server is not reachable on port ${MANIAPLANET_XMLRPC_PORT}"
+  exit 1
+fi
+
 php /maniacontrol/ManiaControl.php >ManiaControl.log 2>&1
