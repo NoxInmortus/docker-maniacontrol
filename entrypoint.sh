@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Get out if variable is not initialized
-set -e
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
 
 # Set path
 PATH=/bin:/sbin:/usr/bin:/usr/sbin

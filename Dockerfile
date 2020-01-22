@@ -4,10 +4,10 @@
 #################################
 
 # Get SIMTIO template image
-FROM simtio/base_image:latest
+FROM simtio/base_image:0.5-buster
 
 # Setup author
-MAINTAINER Alban E.G.
+LABEL maintainer='Alban E.G. (IMPERIUM)'
 
 # Env
 ENV MANIAPLANET_SERVER_ADDRESS='' \
@@ -25,12 +25,12 @@ ENV MANIAPLANET_SERVER_ADDRESS='' \
 COPY entrypoint.sh /
 
 # Install packages
-RUN curl -s --retry 5 -L https://packages.sury.org/php/apt.gpg | apt-key add - \
+RUN update-ca-certificates --fresh && curl -sSL --retry 5 https://packages.sury.org/php/apt.gpg | apt-key add - \
   && echo "deb https://packages.sury.org/php/ buster main" | tee /etc/apt/sources.list.d/php.list \
   && apt-get update \
-  && apt-get install --no-install-recommends --no-install-suggests -qy git php7.3 \
-    php7.3-cli php7.3-common php7.3-curl php7.3-fpm php7.3-gd  php7.3-json php7.3-mbstring \
-    php7.3-mysql php7.3-opcache php7.3-readline php7.3-xml php7.3-xmlrpc php7.3-zip \
+  && apt-get install --no-install-recommends --no-install-suggests -qy git php7.4 \
+    php7.4-cli php7.4-common php7.4-curl php7.4-fpm php7.4-gd  php7.4-json php7.4-mbstring \
+    php7.4-mysql php7.4-opcache php7.4-readline php7.4-xml php7.4-xmlrpc php7.4-zip \
   && git clone https://github.com/ManiaControl/ManiaControl.git /maniacontrol \
   && sed -i "s/'LOG_NAME_USE_DATE', true/'LOG_NAME_USE_DATE', false/g" /maniacontrol/ManiaControl.php \
   && sed -i "s/'LOG_NAME_USE_PID', true/'LOG_NAME_USE_PID', false/g" /maniacontrol/ManiaControl.php \
