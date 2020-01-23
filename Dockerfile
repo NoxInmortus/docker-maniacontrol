@@ -28,9 +28,9 @@ COPY entrypoint.sh /
 RUN update-ca-certificates --fresh && curl -sSL --retry 5 https://packages.sury.org/php/apt.gpg | apt-key add - \
   && echo "deb https://packages.sury.org/php/ buster main" | tee /etc/apt/sources.list.d/php.list \
   && apt-get update \
-  && apt-get install --no-install-recommends --no-install-suggests -qy git php7.4 \
-    php7.4-cli php7.4-common php7.4-curl php7.4-fpm php7.4-gd  php7.4-json php7.4-mbstring \
-    php7.4-mysql php7.4-opcache php7.4-readline php7.4-xml php7.4-xmlrpc php7.4-zip \
+  && apt-get install --no-install-recommends --no-install-suggests -qy git php7.2 \
+    php7.2-cli php7.2-common php7.2-curl php7.2-fpm php7.2-gd  php7.2-json php7.2-mbstring \
+    php7.2-mysql php7.2-opcache php7.2-readline php7.2-xml php7.2-xmlrpc php7.2-zip \
   && git clone https://github.com/ManiaControl/ManiaControl.git /maniacontrol \
   && sed -i "s/'LOG_NAME_USE_DATE', true/'LOG_NAME_USE_DATE', false/g" /maniacontrol/ManiaControl.php \
   && sed -i "s/'LOG_NAME_USE_PID', true/'LOG_NAME_USE_PID', false/g" /maniacontrol/ManiaControl.php \

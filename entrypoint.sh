@@ -26,38 +26,29 @@ Brought to you by Imperium
 
 ## Setup /maniacontrol/configs/server.xml if absent
 if [[ ! -f /maniacontrol/configs/server.xml ]]; then
-echo "
-<?xml version="1.0" encoding="UTF-8"?>
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <maniacontrol>
-	<!-- Configure Your ManiaPlanet Server -->
-	<server>
-		<!-- Server Connection Details -->
-		<host>${MANIAPLANET_SERVER_ADDRESS}</host>
-		<port>${MANIAPLANET_XMLRPC_PORT}</port>
+        <server>
+                <host>${MANIAPLANET_SERVER_ADDRESS}</host>
+                <port>${MANIAPLANET_XMLRPC_PORT}</port>
 
-		<!-- XmlRpc Login Details -->
-		<user>${MANIAPLANET_XMLRPC_LOGIN}</user>
-		<pass>${MANIAPLANET_XMLRPC_PASSWORD}</pass>
-	</server>
+                <user>${MANIAPLANET_XMLRPC_LOGIN}</user>
+                <pass>${MANIAPLANET_XMLRPC_PASSWORD}</pass>
+        </server>
 
-	<!-- Configure the MySQL Database used by ManiaControl -->
-	<database>
-		<!-- MySQL Server -->
-		<host>${MYSQL_SERVER_ADDRESS}</host>
-		<port>${MYSQL_SERVER_PORT}</port>
+        <database>
+                <host>${MYSQL_SERVER_ADDRESS}</host>
+                <port>${MYSQL_SERVER_PORT}</port>
 
-		<!-- MySQL User -->
-		<user>${MYSQL_USER}</user>
-		<pass>${MYSQL_PASSWORD}</pass>
+                <user>${MYSQL_USER}</user>
+                <pass>${MYSQL_PASSWORD}</pass>
 
-		<!-- Database Name -->
-		<name>${MYSQL_DATABASE}</name>
-	</database>
+                <name>${MYSQL_DATABASE}</name>
+        </database>
 
-	<!-- Configure Server Master-Administrators -->
-	<masteradmins>
-		<login>${MASTER_ADMIN_USER}</login>
-	</masteradmins>
+        <masteradmins>
+                <login>${MASTER_ADMIN_USER}</login>
+        </masteradmins>
 </maniacontrol>" > /maniacontrol/configs/server.xml
 fi
 
@@ -65,15 +56,15 @@ fi
 trap : EXIT TERM KILL INT SIGKILL SIGTERM SIGQUIT
 
 # netcat test mysql
-if [[ ! -z $(nc -zv ${MYSQL_SERVER_ADDRESS} ${MYSQL_SERVER_PORT} 2>&1 | grep refused) ]]; then
+if [[ $(nc -zv ${MYSQL_SERVER_ADDRESS} ${MYSQL_SERVER_PORT}; echo $?) -ne 0 ]]; then
   echo "${MYSQL_SERVER_ADDRESS} mysql server is not reachable on port ${MYSQL_SERVER_PORT}"
   exit 1
 fi
 
 # netcat test trackmania
-if [[ ! -z $(nc -zv ${MANIAPLANET_SERVER_ADDRESS} ${MYSQL_SERVER_PORT} 2>&1 | grep refused) ]]; then
-  echo "${MANIAPLANET_SERVER_ADDRESS} trackmania server is not reachable on port ${MANIAPLANET_XMLRPC_PORT}"
-  exit 1
+if [[ $(nc -zv ${MANIAPLANET_SERVER_ADDRESS} ${MANIAPLANET_XMLRPC_PORT}; echo $?) -ne 0 ]]; then
+ echo "${MANIAPLANET_SERVER_ADDRESS} trackmania server is not reachable on port ${MANIAPLANET_XMLRPC_PORT}"
+ exit 1
 fi
 
-php /maniacontrol/ManiaControl.php >ManiaControl.log 2>&1
+php /maniacontrol/ManiaControl.php 2>&1

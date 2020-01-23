@@ -1,6 +1,6 @@
 # Docker - ManiaControl
 
-This container contain PHP-7.4 and ManiaControl.
+This container contain PHP-7.2 and ManiaControl.
 
 ## Available Architectures (since 0.2)
 - amd64
