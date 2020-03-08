@@ -2,7 +2,9 @@
 
 This container contain PHP-7.2 and ManiaControl.
 
-## Available Architectures (since 0.2)
+Version 1.1
+
+## Available Architectures
 - amd64
 - arm64 (aarch64)
 - armv7 (arm)
@@ -23,17 +25,6 @@ docker run --name=maniacontrol -d -v maniacontrol:/maniacontrol \
   -e MASTER_ADMIN_USER= 'xXxGaMeRxXx' \
  albanosdes/docker-maniacontrol
 ```
-
-## Dev/Build
-```
-# Dockerhub
-docker build -t albanosdes/docker-maniacontrol -t albanosdes/docker-maniacontrol:0.x .
-docker push albanosdes/docker-maniacontrol && docker push albanosdes/docker-maniacontrol:0.x
-
-Multiarch :
-* `docker buildx build -t albanosdes/docker-maniacontrol -t albanosdes/docker-maniacontrol:0.x --platform=linux/aarch64,linux/amd64,linux/arm . --push`
-```
-
 
 ## Sources
 - https://github.com/ManiaControl/ManiaControl

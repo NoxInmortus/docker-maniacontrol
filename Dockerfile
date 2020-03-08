@@ -35,8 +35,9 @@ RUN update-ca-certificates --fresh && curl -sSL --retry 5 https://packages.sury.
   && sed -i "s/'LOG_NAME_USE_DATE', true/'LOG_NAME_USE_DATE', false/g" /maniacontrol/ManiaControl.php \
   && sed -i "s/'LOG_NAME_USE_PID', true/'LOG_NAME_USE_PID', false/g" /maniacontrol/ManiaControl.php \
   && chmod +x /entrypoint.sh \
+  && apt-get remove --purge -qy git \
   && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* \
   ;
 
 # Volumes
