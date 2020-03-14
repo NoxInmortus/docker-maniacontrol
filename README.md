@@ -2,7 +2,7 @@
 
 This container contain PHP-7.2 and ManiaControl.
 
-Version 1.1
+Version 1.2
 
 ## Available Architectures
 - amd64
