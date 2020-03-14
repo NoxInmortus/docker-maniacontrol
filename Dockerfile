@@ -3,8 +3,8 @@
 ## Imperium                    ##
 #################################
 
-# Get SIMTIO template image
-FROM simtio/base_image:0.5-buster
+# Use official debian image https://hub.docker.com/_/debian/
+FROM debian:buster-slim
 
 # Setup author
 LABEL maintainer='Alban E.G. (IMPERIUM)'
@@ -25,7 +25,9 @@ ENV MANIAPLANET_SERVER_ADDRESS='' \
 COPY entrypoint.sh /
 
 # Install packages
-RUN update-ca-certificates --fresh && curl -sSL --retry 5 https://packages.sury.org/php/apt.gpg | apt-key add - \
+RUN apt-get update \
+  && apt-get install --no-install-recommends --no-install-suggests -qy curl netcat openssl ca-certificates \
+  && update-ca-certificates --fresh && curl -sSL --retry 5 https://packages.sury.org/php/apt.gpg | apt-key add - \
   && echo "deb https://packages.sury.org/php/ buster main" | tee /etc/apt/sources.list.d/php.list \
   && apt-get update \
   && apt-get install --no-install-recommends --no-install-suggests -qy git php7.2 \
@@ -35,7 +37,7 @@ RUN update-ca-certificates --fresh && curl -sSL --retry 5 https://packages.sury.
   && sed -i "s/'LOG_NAME_USE_DATE', true/'LOG_NAME_USE_DATE', false/g" /maniacontrol/ManiaControl.php \
   && sed -i "s/'LOG_NAME_USE_PID', true/'LOG_NAME_USE_PID', false/g" /maniacontrol/ManiaControl.php \
   && chmod +x /entrypoint.sh \
-  && apt-get remove --purge -qy git \
+  && apt-get remove --purge -qy git curl \
   && apt-get clean \
   && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* \
   ;
