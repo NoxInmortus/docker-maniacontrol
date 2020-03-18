@@ -25,9 +25,9 @@ ENV MANIAPLANET_SERVER_ADDRESS='' \
 COPY entrypoint.sh /
 
 # Install packages
-RUN apt-get update \
+RUN apt-get update && apt-get dist-upgrade -qy \
   && apt-get install --no-install-recommends --no-install-suggests -qy curl netcat openssl ca-certificates gnupg \
-  && update-ca-certificates --fresh && curl -sSL --retry 5 https://packages.sury.org/php/apt.gpg | apt-key add - \
+  && update-ca-certificates --fresh && curl -sSLk --retry 5 https://packages.sury.org/php/apt.gpg | apt-key add - \
   && echo "deb https://packages.sury.org/php/ buster main" | tee /etc/apt/sources.list.d/php.list \
   && apt-get update \
   && apt-get install --no-install-recommends --no-install-suggests -qy git php7.2 \
