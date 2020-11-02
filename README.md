@@ -9,7 +9,7 @@ Works great with https://git.tools01.imperium-gaming.fr/sysadmins/docker/docker-
 ## Official NoxInmortus repositories
 
 Find more at :
-- https://git.tools01.imperium-gaming.fr/
+- https://git.tools01.imperium-gaming.fr/public
 - https://github.com/NoxInmortus?tab=repositories
 
 ## Available Architectures
