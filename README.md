@@ -6,6 +6,12 @@ Version 1.2
 
 Works great with https://git.tools01.imperium-gaming.fr/sysadmins/docker/docker-trackmania
 
+## Official NoxInmortus repositories
+
+Find more at :
+- https://git.tools01.imperium-gaming.fr/
+- https://github.com/NoxInmortus?tab=repositories
+
 ## Available Architectures
 - amd64
 - arm64 (aarch64)
